@@ -4,6 +4,8 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+# Generate secret key.
+python compose/production/django/secretkey.py
 
 python /app/manage.py collectstatic --noinput
 {% if cookiecutter.use_whitenoise == 'y' and cookiecutter.use_compressor == 'y' %}
