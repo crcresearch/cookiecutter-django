@@ -12,6 +12,7 @@ from sentry_sdk.integrations.redis import RedisIntegration
 {% endif -%}
 from .base import *  # noqa
 from .base import env
+import os
 
 # GENERAL
 # ------------------------------------------------------------------------------

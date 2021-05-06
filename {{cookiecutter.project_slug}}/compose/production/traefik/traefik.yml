@@ -20,6 +20,7 @@ entryPoints:
     address: ":5555"
   {%- endif %}
 
+{%- if cookiecutter.use_letsencrypt == 'y' %}
 certificatesResolvers:
   letsencrypt:
     # https://docs.traefik.io/master/https/acme/#lets-encrypt
@@ -29,6 +30,16 @@ certificatesResolvers:
       # https://docs.traefik.io/master/https/acme/#httpchallenge
       httpChallenge:
         entryPoint: web
+{%- else %}
+# https://doc.traefik.io/traefik/master/https/tls/
+tls:
+  certificates:
+    - certFile: /etc/ssl/dcc_crc_nd_edu.cer
+      keyFile: /etc/ssl/dcc_crc_nd_edu.key
+  options:
+    myTLSOptions:
+      minVersion: VersionTLS1
+{%- endif %}
 
 http:
   routers:
@@ -44,8 +55,12 @@ http:
         - csrf
       service: django
       tls:
+        {%- if cookiecutter.use_letsencrypt == 'y' %}
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
+        {%- else %}
+        options: myTLSOptions
+        {%- endif %}
     {%- if cookiecutter.use_celery == 'y' %}
 
     flower-secure-router:
@@ -54,8 +69,12 @@ http:
         - flower
       service: flower
       tls:
+        {%- if cookiecutter.use_letsencrypt == 'y' %}
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
+        {%- else %}
+        options: myTLSOptions
+        {%- endif %}
     {%- endif %}
 
   middlewares:
