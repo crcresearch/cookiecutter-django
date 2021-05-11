@@ -1,3 +1,5 @@
+import os
+
 {% if cookiecutter.use_sentry == 'y' -%}
 import logging
 
@@ -231,6 +233,13 @@ ANYMAIL = {
 # https://anymail.readthedocs.io/en/stable/esps
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 ANYMAIL = {}
+
+{%- elif cookiecutter.mail_service == 'NDSMTP' %}
+
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.nd.edu')
+EMAIL_PORT = env('EMAIL_PORT', default='25')
+
 {%- endif %}
 
 {% if cookiecutter.use_compressor == 'y' -%}

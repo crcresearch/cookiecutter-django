@@ -58,12 +58,12 @@ services:
     # networks:
     #   - frontend
     volumes:
-      - ./compose/production/certs:/etc/ssl
-      - ./compose/production/config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ../certs:/etc/ssl
+      - ./compose/production/nginx/nginx.conf:/etc/nginx/nginx.conf
       {%- if cookiecutter.VUE_APP == 'y' %}
-      - ./compose/production/config/nginx/nbvcc-dcc.conf:/etc/nginx/conf.d/site.conf
+      - ./compose/production/nginx/nbvcc-dcc.conf:/etc/nginx/conf.d/site.conf
       {%- else %}
-      - ./compose/production/config/nginx/dcc.conf:/etc/nginx/conf.d/site.conf
+      - ./compose/production/nginx/dcc.conf:/etc/nginx/conf.d/site.conf
       {%- endif %}
 
     # environment: # NOTE: Without

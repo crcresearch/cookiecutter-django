@@ -37,6 +37,7 @@
     "GCP"
   ],
   "mail_service": [
+    "NDSMTP",
     "Mailgun",
     "Amazon SES",
     "Mailjet",
@@ -64,6 +65,7 @@
     "Github"
   ],
   "VUE_APP": "y",
+  "VUE_APP_DIR": "nuxt_bv4_cc",
   "VUE_APP_API_PATH": "",
   "VUE_APP_BACKEND_PATH": "",
   "drone_registry": "{{ cookiecutter.project_slug }}",

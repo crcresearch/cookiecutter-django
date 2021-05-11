@@ -215,3 +215,7 @@ tags
 .idea/
 
 .pytest_cache/
+
+
+# If there is a VUE APP, ignore that directory.
+{{cookiecutter.VUE_APP_DIR}}

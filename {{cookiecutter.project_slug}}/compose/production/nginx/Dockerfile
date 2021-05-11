@@ -6,13 +6,13 @@ ARG VUE_APP_API_PATH
 ARG VUE_APP_BACKEND_PATH
 
 # Copy build files.
-COPY ./ /app
+COPY ./{{cookiecutter.VUE_APP_DIR}} /app
 
 # make the 'app' folder the current working directory
 WORKDIR /app
 
 # Install and build.
-RUN npm install && npm run build
+RUN npm install && npm run build && npm run generate
 
 # PRODUCTION-STAGE
 FROM nginx:stable-alpine as production-stage
@@ -21,4 +21,4 @@ FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/dist /app
 
 # Copy a default nginx.conf with all the necessary configurations.
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./compose/production/nginx/nginx.conf /etc/nginx/nginx.conf
