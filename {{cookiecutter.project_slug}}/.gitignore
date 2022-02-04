@@ -333,3 +333,9 @@ MailHog
 {% if cookiecutter.use_docker == 'y' %}
 .ipython/
 {%- endif %}
+
+# Exclude nuxt project directory.
+{{ cookiecutter.project_slug }}-nb4v3cc
+
+# secretkey.txt
+secretkey.txt

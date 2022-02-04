@@ -1,0 +1,19 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+{%- if cookiecutter.POSTGRES_DB == '' %}
+POSTGRES_DB={{ cookiecutter.POSTGRES_DB }}
+{% else %}
+POSTGRES_DB={{ cookiecutter.project_slug }}
+{%- endif %}
+{%- if cookiecutter.POSTGRES_USER == '' %}
+POSTGRES_USER={{ cookiecutter.POSTGRES_USER }}
+{% else %}
+POSTGRES_USER=!!!SET POSTGRES_USER!!!
+{%- endif %}
+{%- if cookiecutter.POSTGRES_PASSWORD == '' %}
+POSTGRES_PASSWORD={{ cookiecutter.POSTGRES_PASSWORD }}
+{% else %}
+POSTGRES_PASSWORD=!!!SET POSTGRES_PASSWORD!!!
+{%- endif %}
